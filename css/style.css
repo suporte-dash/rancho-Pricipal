@@ -1275,11 +1275,15 @@ body.menu-modal-open {
 .channel-card {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  width: min(100%, 15.5rem);
+  height: 3.6rem;
   gap: 0.8rem;
+  padding: 0 1.6rem;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-full);
-  padding: 0.9rem 1.6rem;
   transition: transform 0.3s var(--ease-out), background 0.3s;
 }
 
@@ -1525,6 +1529,11 @@ body.menu-modal-open {
   .footer-grid { grid-template-columns: 1fr; gap: var(--space-md); }
 
   .footer-bottom { flex-direction: column; align-items: flex-start; }
+
+  .contact-channels {
+    flex-direction: column;
+    align-items: center;
+  }
 
   section { padding: var(--space-lg) var(--space-sm); }
 }
