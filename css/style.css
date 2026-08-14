@@ -934,36 +934,60 @@ body.menu-modal-open {
 .gallery .section-heading p { color: var(--text-muted-light); }
 
 .gallery-track {
-  display: flex;
+  position: relative;
+  min-height: clamp(280px, 34vw, 440px);
+  overflow: hidden;
+  perspective: 1100px;
+}
+
+.gallery-page {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-sm);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: var(--space-sm);
-  scrollbar-width: thin;
-  scrollbar-color: var(--indigo-noite) transparent;
-  cursor: grab;
-  -webkit-user-select: none;
-  user-select: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(88px, 0, -100px);
+  transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out);
+  will-change: opacity, transform;
 }
 
-.gallery-track.is-dragging {
-  cursor: grabbing;
-  scroll-snap-type: none;
-  scroll-behavior: auto;
+.gallery-page.is-active {
+  z-index: 2;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0);
 }
 
-.gallery-track::-webkit-scrollbar {
-  height: 8px;
+.gallery-page.is-exiting {
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(-88px, 0, -100px);
 }
 
-.gallery-track::-webkit-scrollbar-thumb {
-  background: rgba(43, 33, 64, 0.5);
-  border-radius: var(--radius-full);
+.gallery-page.is-active .gallery-item {
+  animation: gallery-parallax-card-in 0.85s var(--ease-out) both;
+}
+
+.gallery-page.is-active .gallery-item:nth-child(2) { animation-delay: 0.05s; }
+.gallery-page.is-active .gallery-item:nth-child(3) { animation-delay: 0.1s; }
+.gallery-page.is-active .gallery-item:nth-child(4) { animation-delay: 0.15s; }
+
+@keyframes gallery-parallax-card-in {
+  from {
+    opacity: 0.55;
+    transform: translate3d(28px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .gallery-item {
-  scroll-snap-align: start;
-  flex: 0 0 min(340px, 80vw);
+  min-width: 0;
   aspect-ratio: 4 / 5;
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -977,11 +1001,11 @@ body.menu-modal-open {
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s var(--ease-out);
-  pointer-events: none; /* evita o navegador iniciar "arrastar imagem" nativo */
+  pointer-events: none;
 }
 
-.gallery-item:hover img {
-  transform: scale(1.06);
+.gallery-page.is-active .gallery-item:hover img {
+  transform: scale(1.04);
 }
 
 .gallery-caption {
@@ -993,6 +1017,27 @@ body.menu-modal-open {
   background: linear-gradient(0deg, rgba(15, 12, 20, 0.75), transparent);
   font-size: 0.9rem;
   font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .gallery-track {
+    width: min(100%, 420px);
+    min-height: min(72svh, 540px);
+    margin-inline: auto;
+  }
+
+  .gallery-page {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-page.is-active .gallery-item {
+    animation-delay: 0s;
+  }
+
+  .gallery-item {
+    height: 100%;
+    aspect-ratio: auto;
+  }
 }
 
 /* ---------- Seção: Instagram ---------- */
