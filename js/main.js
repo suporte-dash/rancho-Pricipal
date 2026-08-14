@@ -96,58 +96,95 @@ function initScrollReveal() {
   targets.forEach((el) => observer.observe(el));
 }
 
-/* ---------- Galeria: arrastar com o mouse (igual ao touch no celular) ---------- */
-function initGalleryDrag() {
+/* ---------- Galeria: páginas automáticas ---------- */
+function initGalleryPagedCarousel() {
   const track = document.querySelector('.gallery-track');
   if (!track) return;
 
-  let isDown = false;
-  let startX = 0;
-  let scrollStart = 0;
-  let moved = false;
+  const items = Array.from(track.querySelectorAll('.gallery-item'));
+  if (!items.length) return;
 
-  const start = (x) => {
-    isDown = true;
-    moved = false;
-    startX = x;
-    scrollStart = track.scrollLeft;
-    track.classList.add('is-dragging');
-  };
+  const mobileQuery = window.matchMedia('(max-width: 720px)');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const PAGE_DURATION_MS = 5000;
+  let pages = [];
+  let current = 0;
+  let intervalId = null;
+  let transitionId = null;
 
-  const move = (x) => {
-    if (!isDown) return;
-    const delta = x - startX;
-    if (Math.abs(delta) > 3) moved = true;
-    track.scrollLeft = scrollStart - delta;
-  };
-
-  const end = () => {
-    isDown = false;
-    track.classList.remove('is-dragging');
-  };
-
-  // Mouse (desktop)
-  track.addEventListener('mousedown', (e) => {
-    start(e.pageX);
-    e.preventDefault(); // evita seleção de texto/imagem ao arrastar
-  });
-
-  window.addEventListener('mousemove', (e) => move(e.pageX));
-  window.addEventListener('mouseup', end);
-  track.addEventListener('mouseleave', () => {
-    if (isDown) end();
-  });
-
-  // Evita que o clique "vazando" do arraste dispare outras ações (ex. abrir imagem)
-  track.addEventListener('click', (e) => {
-    if (moved) {
-      e.preventDefault();
-      e.stopPropagation();
+  const stop = () => {
+    if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
     }
-  }, true);
+  };
 
-  // Touch (celular) já funciona nativamente via overflow-x + scroll-snap,
-  // não precisa de JS adicional.
+  const showPage = (index) => {
+    const next = pages[index];
+    const previous = pages[current];
+    if (!next) return;
+
+    if (transitionId) {
+      clearTimeout(transitionId);
+      transitionId = null;
+    }
+
+    if (next === previous) {
+      next.classList.add('is-active');
+      return;
+    }
+
+    if (previous) {
+      previous.classList.remove('is-active');
+      previous.classList.add('is-exiting');
+    }
+
+    next.classList.remove('is-exiting');
+    next.classList.add('is-active');
+    current = index;
+
+    transitionId = setTimeout(() => {
+      pages.forEach((page, i) => {
+        if (i !== current) page.classList.remove('is-exiting');
+      });
+      transitionId = null;
+    }, 900);
+  };
+
+  const start = () => {
+    if (prefersReducedMotion || intervalId || pages.length < 2) return;
+    intervalId = setInterval(() => {
+      showPage((current + 1) % pages.length);
+    }, PAGE_DURATION_MS);
+  };
+
+  const buildPages = () => {
+    stop();
+    current = 0;
+    const pageSize = mobileQuery.matches ? 1 : 4;
+    const fragment = document.createDocumentFragment();
+    pages = [];
+
+    for (let startIndex = 0; startIndex < items.length; startIndex += pageSize) {
+      const page = document.createElement('div');
+      page.className = 'gallery-page';
+      page.append(...items.slice(startIndex, startIndex + pageSize));
+      pages.push(page);
+      fragment.append(page);
+    }
+
+    track.replaceChildren(fragment);
+    pages[0].classList.add('is-active');
+    current = 0;
+    start();
+  };
+
+  buildPages();
+  mobileQuery.addEventListener('change', buildPages);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+    else start();
+  });
 }
 
 /* ---------- Barra de progresso de rolagem ---------- */
@@ -489,7 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAboutMediaCarousel();
   initCardTilt();
   initMenuModal();
-  initGalleryDrag();
+  initGalleryPagedCarousel();
   initFooterYear();
   initLazyImages();
 });
