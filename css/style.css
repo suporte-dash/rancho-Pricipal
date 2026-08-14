@@ -1275,7 +1275,7 @@ body.menu-modal-open {
 .channel-card {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   box-sizing: border-box;
   width: min(100%, 15.5rem);
   height: 3.6rem;
