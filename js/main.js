@@ -26,17 +26,78 @@ function initMobileNav() {
   const nav = document.querySelector('.main-nav');
   if (!toggle || !nav) return;
 
+  const backdrop = document.createElement('button');
+  backdrop.type = 'button';
+  backdrop.className = 'nav-backdrop';
+  backdrop.setAttribute('aria-label', 'Fechar menu');
+  backdrop.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(backdrop);
+
+  const closeNav = () => {
+    nav.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Abrir menu');
+    backdrop.classList.remove('is-visible');
+    backdrop.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('nav-open');
+  };
+
+  const openNav = () => {
+    nav.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Fechar menu');
+    backdrop.classList.add('is-visible');
+    backdrop.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('nav-open');
+  };
+
   toggle.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', String(isOpen));
+    if (nav.classList.contains('is-open')) closeNav();
+    else openNav();
   });
 
-  // Fecha o menu ao clicar em um link (mobile)
+  backdrop.addEventListener('click', closeNav);
+
   nav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
+    link.addEventListener('click', closeNav);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && nav.classList.contains('is-open')) closeNav();
+  });
+
+  window.addEventListener('resize', () => {
+    if (!window.matchMedia('(max-width: 720px)').matches) closeNav();
+  }, { passive: true });
+}
+
+/* ---------- Estado ativo da navegação ---------- */
+function initActiveNav() {
+  const links = [...document.querySelectorAll('.main-nav a[href^="#"]')];
+  const sections = links
+    .map((link) => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+  if (!links.length || !sections.length || !('IntersectionObserver' in window)) return;
+
+  const setActive = (id) => {
+    links.forEach((link) => {
+      const active = link.getAttribute('href') === `#${id}`;
+      link.classList.toggle('is-active', active);
+      if (active) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
     });
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (visible) setActive(visible.target.id);
+  }, { rootMargin: '-22% 0px -62% 0px', threshold: [0.15, 0.35, 0.6] });
+
+  sections.forEach((section) => observer.observe(section));
+  links.forEach((link) => {
+    link.addEventListener('click', () => setActive(link.getAttribute('href').slice(1)));
   });
 }
 
@@ -517,6 +578,7 @@ function initMenuModal() {
 document.addEventListener('DOMContentLoaded', () => {
   initHeaderScroll();
   initMobileNav();
+  initActiveNav();
   initHeroParallax();
   initScrollProgress();
   initScrollReveal();
