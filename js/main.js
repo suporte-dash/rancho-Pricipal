@@ -530,3 +530,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initFooterYear();
   initLazyImages();
 });
+/* ===== Ícones circulares dos canais de contato ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  const names = ['phone', 'whatsapp', 'instagram', 'facebook'];
+  document.querySelectorAll('.contact-channels .channel-card').forEach((card, index) => {
+    const oldIcon = card.querySelector('svg');
+    if (!oldIcon) return;
+    const symbol = document.createElement('span');
+    symbol.className = `contact-symbol contact-symbol-${names[index]}`;
+    symbol.setAttribute('aria-hidden', 'true');
+    oldIcon.replaceWith(symbol);
+  });
+});
