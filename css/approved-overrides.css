@@ -973,3 +973,23 @@
     min-height: 0;
   }
 }
+
+/* Publicado após aprovação: textos dos destaques ocupam a largura útil do card. */
+.highlights-grid .highlight-card h3,
+.highlights-grid .highlight-card p {
+  width: 100%;
+  max-width: none;
+}
+
+@media (max-width: 600px) {
+  .highlights-grid .highlight-card h3,
+  .highlights-grid .highlight-card p {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Publicado após aprovação: rótulo “Por que visitar?” com a tonalidade rosada de “Sobre o Rancho”. */
+.highlights .section-heading .eyebrow {
+  color: var(--magenta-crepusculo);
+}
