@@ -487,3 +487,30 @@
 .contact-symbol-facebook {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239bc8ff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z'/%3E%3C/svg%3E");
 }
+
+/* ===== Hero: centralização final e zoom reduzido no desktop ===== */
+/* A imagem cobre a área sem faixa lateral; o deslocamento alinha o sol ao eixo visual. */
+.hero-bg img {
+  width: 105%;
+  max-width: none;
+  object-position: center 65%;
+  transform: translateX(-6%) scale(1);
+  animation: heroKenBurnsCentered 22s ease-in-out infinite alternate;
+}
+
+@keyframes heroKenBurnsCentered {
+  from { transform: translateX(-6%) scale(1); }
+  to { transform: translateX(-6%) scale(1.02); }
+}
+
+@keyframes heroKenBurnsMobileCentered {
+  from { transform: translateX(-4.5%) scale(1.08); }
+  to { transform: translateX(-4.5%) scale(1.18); }
+}
+
+@media (max-width: 720px) {
+  .hero-bg img {
+    transform: translateX(-4.5%) scale(1.08);
+    animation: heroKenBurnsMobileCentered 22s ease-in-out infinite alternate;
+  }
+}
