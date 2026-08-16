@@ -320,7 +320,7 @@
 }
 
 .btn-ghost .btn-icon {
-  background: #0f4a4d; /* Verde-Rio */
+  background: #0f4a4d; /* Verde-Mar */
   color: #f7ecd9;
   border-radius: 6px 14px 14px 14px;
 }
@@ -513,4 +513,10 @@
     transform: translateX(-4.5%) scale(1.08);
     animation: heroKenBurnsMobileCentered 22s ease-in-out infinite alternate;
   }
+}
+
+/* Prévia: remove a numeração editorial dos cards de “Por que visitar?”. */
+.highlight-card::after {
+  content: none !important;
+  display: none;
 }

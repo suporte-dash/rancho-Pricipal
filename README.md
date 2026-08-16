@@ -6,7 +6,7 @@ Landing page institucional para o **Rancho Pirabas**, bar e espaço para eventos
 
 A página é construída ao redor do maior diferencial real do local: o pôr do sol. Cada seção herda uma cor de um gradiente contínuo que vai do dourado da tarde (Hero) até a noite estrelada (Rodapé), com o disco solar se movendo suavemente (parallax) conforme o usuário rola a página. Uma linha de horizonte em SVG separa as seções, reforçando a narrativa visual.
 
-- **Paleta:** Âmbar do Poente `#ff7a45` · Magenta do Crepúsculo `#c4467a` · Índigo da Noite `#2b2140` · Verde-Rio `#0f4a4d` · Areia `#f7ecd9` · Espuma `#fffbf4`
+- **Paleta:** Âmbar do Poente `#ff7a45` · Magenta do Crepúsculo `#c4467a` · Índigo da Noite `#2b2140` · Verde-Mar `#0f4a4d` · Areia `#f7ecd9` · Espuma `#fffbf4`
 - **Tipografia:** `Fraunces` (display/serifada) + `Plus Jakarta Sans` (corpo/UI), via Google Fonts.
 
 ## Estrutura de pastas
@@ -22,7 +22,7 @@ rancho-pirabas/
 │                        #   da galeria, ano dinâmico no rodapé
 ├── assets/
 │   └── images/
-│       ├── logo-mark.svg          # Marca (sol + rio)
+│       ├── logo-mark.svg          # Marca (sol + mar)
 │       ├── comidas/               # Fotos reais: café da manhã, petiscos etc.
 │       ├── deck/                  # Fotos reais: fachada, deck, passarela
 │       ├── drinks/                 # Fotos reais: drinks autorais
@@ -64,8 +64,8 @@ Os itens e preços exibidos na seção `#cardapio` foram extraídos de dois flye
 - Cidade/Estado: São João de Pirabas — PA
 - Coordenadas: -0.7650672, -47.1740857
 - Funcionamento: sexta, sábado e domingo, das 16h às 23h
-- Telefone/WhatsApp: (91) 98553-6871
-- Instagram: @ranchopirabas (26 mil seguidores)
+- Telefone: (91) 98490-4005 · WhatsApp: (91) 98503-1257
+- Instagram: @ranchopirabas (29 mil seguidores)
 - Facebook: /ranchopirabas (7,7 mil curtidas)
 - Formas de pagamento: Pix, Visa, Mastercard, Elo (confirmado via flyer de cardápio)
 
