@@ -368,3 +368,122 @@
     padding-right: 0.85rem;
   }
 }
+
+/* ===== Ícones circulares minimalistas dos canais de contato ===== */
+/* Prévia: upgrade dos quatro canais de contato. Não afeta o header-cta Reservar mesa. */
+.contact-channels .channel-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: min(100%, 16rem);
+  height: 3.8rem;
+  gap: 0.72rem;
+  padding: 0 1.15rem;
+  background: linear-gradient(135deg, rgba(247, 236, 217, 0.12), rgba(196, 70, 122, 0.14));
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 18px 18px 8px 18px;
+  color: var(--text-light);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  box-shadow: 0 12px 24px rgba(18, 13, 32, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: transform 0.3s var(--ease-out), background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-channels .channel-card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--amber-poente);
+}
+
+.contact-channels .channel-card:nth-child(2)::before { background: #25d366; }
+.contact-channels .channel-card:nth-child(3)::before { background: #e1306c; }
+.contact-channels .channel-card:nth-child(4)::before { background: #1877f2; }
+
+.contact-channels .channel-card svg {
+  flex: 0 0 auto;
+  width: 1.05rem;
+  height: 1.05rem;
+  padding: 0.48rem;
+  border-radius: 50%;
+  background: rgba(10, 8, 20, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffbb82;
+  stroke: currentColor;
+  stroke-width: 2.25;
+  opacity: 1;
+  filter: none;
+  transition: transform 0.3s var(--ease-out), background 0.3s, color 0.3s;
+}
+
+.contact-channels .channel-card:nth-child(2) svg { color: #7ee6a8; background: rgba(10, 8, 20, 0.42); }
+.contact-channels .channel-card:nth-child(3) svg { color: #ff9ac0; background: rgba(10, 8, 20, 0.42); }
+.contact-channels .channel-card:nth-child(4) svg { color: #9bc8ff; background: rgba(10, 8, 20, 0.42); }
+
+.contact-channels .channel-card:hover {
+  transform: translateY(-4px) rotate(-0.5deg);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(196, 70, 122, 0.2));
+  border-color: rgba(255, 255, 255, 0.42);
+  box-shadow: 0 18px 32px rgba(18, 13, 32, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.contact-channels .channel-card:hover svg {
+  transform: rotate(-5deg) scale(1.05);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 720px) {
+  .contact-channels .channel-card {
+    width: min(100%, 18rem);
+  }
+}
+
+/* Reforço do traço interno dos símbolos SVG. */
+.contact-channels .channel-card svg path,
+.contact-channels .channel-card svg rect,
+.contact-channels .channel-card svg circle {
+  stroke: currentColor !important;
+  fill: none !important;
+  stroke-width: 2.35 !important;
+  opacity: 1 !important;
+}
+
+/* Cores explícitas nos caminhos internos para evitar herança escura do tema. */
+.contact-channels .channel-card:nth-child(1) svg path { stroke: #ffbb82 !important; }
+.contact-channels .channel-card:nth-child(2) svg path { stroke: #7ee6a8 !important; }
+.contact-channels .channel-card:nth-child(3) svg rect,
+.contact-channels .channel-card:nth-child(3) svg circle { stroke: #ff9ac0 !important; }
+.contact-channels .channel-card:nth-child(4) svg path { stroke: #9bc8ff !important; }
+
+/* Selos vetoriais minimalistas da prévia. */
+.contact-channels .contact-symbol {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background-color: rgba(10, 8, 20, 0.66);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1rem 1rem;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.contact-symbol-phone {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffbb82' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z'/%3E%3C/svg%3E");
+}
+
+.contact-symbol-whatsapp {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237ee6a8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/%3E%3C/svg%3E");
+}
+
+.contact-symbol-instagram {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff9ac0' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='2' width='20' height='20' rx='5'/%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Ccircle cx='17.5' cy='6.5' r='1'/%3E%3C/svg%3E");
+}
+
+.contact-symbol-facebook {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239bc8ff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z'/%3E%3C/svg%3E");
+}
