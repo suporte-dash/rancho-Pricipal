@@ -520,3 +520,17 @@
   content: none !important;
   display: none;
 }
+
+/* Correção aprovada: reforça o contraste do botão de mapas em todos os estados. */
+.location .info-row a.btn-primary,
+.location .info-row a.btn-primary:visited,
+.location .info-row a.btn-primary:hover,
+.location .info-row a.btn-primary:focus,
+.location .info-row a.btn-primary:active {
+  color: var(--indigo-noite) !important;
+  text-decoration: none;
+}
+
+.location .info-row a.btn-primary .btn-icon {
+  color: var(--indigo-noite) !important;
+}
