@@ -799,6 +799,7 @@
   transform: translateY(-6px) rotate(0.3deg);
 }
 
+
 .highlights-grid .highlight-card h3 {
   max-width: 13rem;
   margin-bottom: 0.55rem;
@@ -1211,4 +1212,214 @@
 .menu .section-heading .eyebrow,
 .gallery .section-heading .eyebrow {
   color: var(--indigo-noite);
+}
+
+/* Correção de contraste do destaque do Hero: dourado solar com contorno indigo. */
+.hero h1 em {
+  color: #ffd98a;
+  -webkit-text-stroke: 0.018em rgba(43, 33, 64, 0.78);
+  paint-order: stroke fill;
+  text-shadow: 0 3px 14px rgba(43, 33, 64, 0.7), 0 1px 0 rgba(255, 250, 240, 0.18);
+}
+
+
+/* Contrato final de animação segura dos cards de destaque. */
+.highlights-grid {
+  perspective: none !important;
+}
+
+.highlights-grid[data-reveal-stagger] > .highlight-card {
+  opacity: 0 !important;
+  transform: none !important;
+  transition: opacity 0.7s var(--ease-out) !important;
+}
+
+.highlights-grid[data-reveal-stagger].is-visible > .highlight-card {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.highlights-grid .highlight-card,
+.highlights-grid .highlight-card:hover,
+.highlights-grid .highlight-card:nth-child(even):hover {
+  --highlight-accent: var(--amber-poente);
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  pointer-events: auto !important;
+  transform: none !important;
+  transform-style: flat !important;
+  will-change: auto !important;
+  transition: none !important;
+  border: 1px solid rgba(125, 76, 39, 0.14) !important;
+  box-shadow: 0 16px 28px rgba(104, 58, 28, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.58) !important;
+}
+
+.highlights-grid .highlight-card:nth-child(2) { --highlight-accent: #0f4a4d; }
+.highlights-grid .highlight-card:nth-child(3) { --highlight-accent: var(--magenta-crepusculo); }
+.highlights-grid .highlight-card:nth-child(4) { --highlight-accent: #704563; }
+
+/* Camada visual exclusiva: pode animar sem transformar o texto ou o artigo. */
+.highlights-grid .highlight-card__fx {
+  position: absolute !important;
+  z-index: 0 !important;
+  inset: 0 !important;
+  display: block !important;
+  pointer-events: none !important;
+  opacity: 0;
+  background: linear-gradient(112deg, transparent 38%, rgba(255, 250, 240, 0.62) 49%, rgba(255, 217, 138, 0.38) 53%, transparent 64%);
+  background-size: 220% 100%;
+  background-position: -120% 50%;
+  transition: opacity 0.18s ease-out, background-position 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) !important;
+}
+
+.highlights-grid .highlight-card:hover .highlight-card__fx {
+  opacity: 1;
+  background-position: 120% 50%;
+}
+
+/* O conteúdo é a zona protegida: sem transform, transition ou will-change. */
+.highlights-grid .highlight-card__content,
+.highlights-grid .highlight-card__content > *,
+.highlights-grid .highlight-card__content .highlight-icon {
+  position: relative !important;
+  z-index: 1 !important;
+  transform: none !important;
+  transform-style: flat !important;
+  will-change: auto !important;
+}
+
+.highlights-grid .highlight-card__content,
+.highlights-grid .highlight-card__content > * {
+  transition: none !important;
+}
+
+.highlights-grid .highlight-card__content .highlight-icon {
+  transition: box-shadow 0.35s ease-out !important;
+}
+
+.highlights-grid .highlight-card:hover .highlight-icon {
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--highlight-accent) 18%, transparent), 0 0 22px color-mix(in srgb, var(--highlight-accent) 30%, transparent);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .highlights-grid .highlight-card__fx {
+    opacity: 0;
+    transition: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .highlights-grid[data-reveal-stagger] > .highlight-card,
+  .highlights-grid[data-reveal-stagger].is-visible > .highlight-card {
+    transition: none !important;
+  }
+
+  .highlights-grid .highlight-card__fx,
+  .highlights-grid .highlight-card:hover .highlight-card__fx {
+    opacity: 0 !important;
+    transition: none !important;
+  }
+}
+
+/* Animação mobile: reflexo único ao entrar na viewport, sem transformar conteúdo. */
+@keyframes highlightMobileSheen {
+  0% { opacity: 0; background-position: -120% 50%; }
+  18% { opacity: 0.92; }
+  62% { opacity: 0.68; }
+  100% { opacity: 0; background-position: 120% 50%; }
+}
+
+@keyframes highlightMobileIconGlow {
+  0%, 100% { box-shadow: 0 5px 10px rgba(43, 33, 64, 0.12); }
+  28% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--highlight-accent) 18%, transparent), 0 0 22px color-mix(in srgb, var(--highlight-accent) 30%, transparent); }
+  70% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--highlight-accent) 10%, transparent), 0 0 13px color-mix(in srgb, var(--highlight-accent) 18%, transparent); }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .highlights-grid .highlight-card:hover .highlight-card__fx {
+    opacity: 0;
+    background-position: -120% 50%;
+  }
+
+  .highlights-grid .highlight-card.is-mobile-inview .highlight-card__fx {
+    animation: highlightMobileSheen 1.45s cubic-bezier(0.22, 0.61, 0.36, 1) 1 both;
+  }
+
+  .highlights-grid .highlight-card.is-mobile-inview .highlight-icon {
+    animation: highlightMobileIconGlow 1.45s ease-out 1 both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .highlights-grid .highlight-card.is-mobile-inview .highlight-card__fx,
+  .highlights-grid .highlight-card.is-mobile-inview .highlight-icon {
+    animation: none !important;
+  }
+}
+
+/* Prévia: microinteração discreta nos cards do Cardápio, sem competir com pratos e preços. */
+.menu-grid .menu-card {
+  isolation: isolate;
+}
+
+.menu-grid .menu-card::before {
+  z-index: 2;
+}
+
+.menu-grid .menu-card::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(112deg, transparent 40%, rgba(255, 214, 142, 0.3) 50%, transparent 60%);
+  background-size: 220% 100%;
+  background-position: -120% 50%;
+  transition: opacity 0.18s ease-out, background-position 0.78s var(--ease-out);
+}
+
+.menu-grid .menu-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .menu-grid .menu-card:hover::after {
+    opacity: 1;
+    background-position: 120% 50%;
+  }
+}
+
+@keyframes menuMobileSheen {
+  0% { opacity: 0; background-position: -120% 50%; }
+  22% { opacity: 0.72; }
+  100% { opacity: 0; background-position: 120% 50%; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .menu-grid .menu-card:hover {
+    transform: none;
+  }
+
+  .menu-grid .menu-card::after,
+  .menu-grid .menu-card:hover::after {
+    opacity: 0;
+    background-position: -120% 50%;
+  }
+
+  .menu-grid .menu-card.is-menu-mobile-inview::after {
+    animation: menuMobileSheen 1.05s var(--ease-out) 1 both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-grid .menu-card::after,
+  .menu-grid .menu-card.is-menu-mobile-inview::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

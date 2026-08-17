@@ -473,9 +473,132 @@ function initAboutMediaCarousel() {
   goTo(0);
 }
 
+/* ---------- Reflexo dos cards no mobile: toque, retorno e entrada ---------- */
+function initHighlightMobileFx() {
+  const cards = document.querySelectorAll('.highlights-grid .highlight-card');
+  if (!cards.length) return;
+
+  const isMobile = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  if (!isMobile) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const restartCardFx = (card) => {
+    if (prefersReducedMotion) return;
+
+    // Remove e readiciona a classe com reflow forçado para reiniciar a animação.
+    card.classList.remove('is-mobile-inview');
+    void card.offsetWidth;
+    card.classList.add('is-mobile-inview');
+  };
+
+  const bindTouchRestart = (card) => {
+    let lastTouch = 0;
+    const handleTouch = (event) => {
+      const pointerType = event.pointerType || 'touch';
+      if (pointerType !== 'touch' && pointerType !== 'pen') return;
+
+      const now = performance.now();
+      if (now - lastTouch < 120) return;
+      lastTouch = now;
+      restartCardFx(card);
+    };
+
+    if ('PointerEvent' in window) {
+      card.addEventListener('pointerdown', handleTouch, { passive: true });
+    } else {
+      card.addEventListener('touchstart', handleTouch, { passive: true });
+    }
+  };
+
+  cards.forEach(bindTouchRestart);
+
+  if (!('IntersectionObserver' in window)) {
+    cards.forEach((card) => restartCardFx(card));
+    return;
+  }
+
+  const visibilityState = new WeakMap();
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const wasVisible = visibilityState.get(entry.target) === true;
+        const isVisible = entry.isIntersecting;
+        visibilityState.set(entry.target, isVisible);
+
+        // Dispara na primeira entrada e novamente sempre que voltar à seção.
+        if (isVisible && !wasVisible) restartCardFx(entry.target);
+      });
+    },
+    { threshold: 0.45, rootMargin: '0px 0px -10% 0px' }
+  );
+
+  cards.forEach((card) => observer.observe(card));
+}
+
+/* ---------- Microinteração dos cards do Cardápio no mobile ---------- */
+function initMenuCardFx() {
+  const cards = document.querySelectorAll('.menu-grid .menu-card');
+  if (!cards.length) return;
+
+  const isMobile = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  if (!isMobile) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const restartCardFx = (card) => {
+    if (prefersReducedMotion) return;
+    card.classList.remove('is-menu-mobile-inview');
+    void card.offsetWidth;
+    card.classList.add('is-menu-mobile-inview');
+  };
+
+  const bindTouchRestart = (card) => {
+    let lastTouch = 0;
+    const handleTouch = (event) => {
+      const pointerType = event.pointerType || 'touch';
+      if (pointerType !== 'touch' && pointerType !== 'pen') return;
+
+      const now = performance.now();
+      if (now - lastTouch < 120) return;
+      lastTouch = now;
+      restartCardFx(card);
+    };
+
+    if ('PointerEvent' in window) {
+      card.addEventListener('pointerdown', handleTouch, { passive: true });
+    } else {
+      card.addEventListener('touchstart', handleTouch, { passive: true });
+    }
+  };
+
+  cards.forEach(bindTouchRestart);
+
+  if (!('IntersectionObserver' in window)) {
+    cards.forEach((card) => restartCardFx(card));
+    return;
+  }
+
+  const visibilityState = new WeakMap();
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const wasVisible = visibilityState.get(entry.target) === true;
+        const isVisible = entry.isIntersecting;
+        visibilityState.set(entry.target, isVisible);
+
+        if (isVisible && !wasVisible) restartCardFx(entry.target);
+      });
+    },
+    { threshold: 0.4, rootMargin: '0px 0px -10% 0px' }
+  );
+
+  cards.forEach((card) => observer.observe(card));
+}
+
 /* ---------- Tilt 3D sutil nos cards ao passar o mouse ---------- */
 function initCardTilt() {
-  const cards = document.querySelectorAll('.highlight-card, .menu-card');
+  const cards = document.querySelectorAll('.menu-card');
   if (!cards.length) return;
 
   const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -485,16 +608,25 @@ function initCardTilt() {
   const maxTilt = 6; // graus
 
   cards.forEach((card) => {
+    let baseRect = null;
+
+    card.addEventListener('mouseenter', () => {
+      // Mantém a referência fixa para impedir que o próprio transform
+      // altere o cálculo e faça o texto parecer “pular” durante o hover.
+      baseRect = card.getBoundingClientRect();
+    });
+
     card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      if (!baseRect) baseRect = card.getBoundingClientRect();
+      const x = (e.clientX - baseRect.left) / baseRect.width - 0.5;
+      const y = (e.clientY - baseRect.top) / baseRect.height - 0.5;
       const rotateY = x * maxTilt * 2;
       const rotateX = -y * maxTilt * 2;
       card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale(1.015)`;
     });
 
     card.addEventListener('mouseleave', () => {
+      baseRect = null;
       card.style.transform = '';
     });
   });
@@ -586,6 +718,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initTextSplit();
   initScrollParallax();
   initAboutMediaCarousel();
+  initHighlightMobileFx();
+  initMenuCardFx();
   initCardTilt();
   initMenuModal();
   initGalleryPagedCarousel();
