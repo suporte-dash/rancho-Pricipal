@@ -36,7 +36,7 @@
 
   <!-- ============ CSS ============ -->
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/approved-overrides.css?v=menu-card-fx-v1-2026" />
+  <link rel="stylesheet" href="css/approved-overrides.css?v=hero-landscape-v1-2026" />
 
   <!-- ============ Favicon ============ -->
   <link rel="icon" type="image/png" href="assets/images/logo-icon-black.png" />
@@ -126,7 +126,10 @@
     ============================================================= -->
     <section class="hero" aria-label="Abertura">
       <div class="hero-bg" aria-hidden="true">
-        <img src="assets/images/por-do-sol/por-do-sol-rio-mangue-nova.webp" alt="Pôr do sol dourado refletido no mar, visto do Rancho Pirabas" width="1000" height="1645" />
+        <picture>
+          <source media="(min-width: 721px)" srcset="assets/images/por-do-sol/por-do-sol-hero-desktop.png" />
+          <img src="assets/images/por-do-sol/por-do-sol-rio-mangue-nova.webp" alt="Pôr do sol dourado refletido no mar, visto do Rancho Pirabas" width="1000" height="1645" />
+        </picture>
       </div>
       <div class="hero-overlay" aria-hidden="true"></div>
 
@@ -647,6 +650,6 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
   </a>
 
-  <script src="js/main.js?v=menu-card-fx-v1-2026"></script>
+  <script src="js/main.js?v=hero-landscape-v1-2026"></script>
 </body>
 </html>

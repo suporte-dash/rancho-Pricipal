@@ -77,7 +77,9 @@ function initActiveNav() {
   const sections = links
     .map((link) => document.querySelector(link.getAttribute('href')))
     .filter(Boolean);
-  if (!links.length || !sections.length || !('IntersectionObserver' in window)) return;
+  if (!links.length || !sections.length) return;
+
+  let ticking = false;
 
   const setActive = (id) => {
     links.forEach((link) => {
@@ -88,17 +90,33 @@ function initActiveNav() {
     });
   };
 
-  const observer = new IntersectionObserver((entries) => {
-    const visible = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (visible) setActive(visible.target.id);
-  }, { rootMargin: '-22% 0px -62% 0px', threshold: [0.15, 0.35, 0.6] });
+  const updateActive = () => {
+    const activationLine = window.scrollY + Math.min(window.innerHeight * 0.34, 300);
+    let activeSection = null;
 
-  sections.forEach((section) => observer.observe(section));
+    sections.forEach((section) => {
+      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+      if (sectionTop <= activationLine) activeSection = section;
+    });
+
+    if (activeSection) setActive(activeSection.id);
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateActive);
+      ticking = true;
+    }
+  };
+
   links.forEach((link) => {
     link.addEventListener('click', () => setActive(link.getAttribute('href').slice(1)));
   });
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate, { passive: true });
+  updateActive();
 }
 
 /* ---------- Parallax sutil da foto de fundo no Hero ---------- */
