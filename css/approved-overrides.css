@@ -1872,3 +1872,13 @@
     text-shadow: 0 2px 12px rgba(31, 22, 48, 0.58);
   }
 }
+
+/* Ajuste aprovado: indicador “Deslize” totalmente visível no desktop, acima da onda inferior. */
+@media (min-width: 721px) {
+  .hero-scroll-cue {
+    bottom: clamp(4.25rem, 8vh, 5.25rem);
+    z-index: 4;
+    color: rgba(255, 250, 240, 0.92);
+    text-shadow: 0 2px 10px rgba(31, 22, 48, 0.62);
+  }
+}
