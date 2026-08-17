@@ -1186,3 +1186,29 @@
     transform: scale(0.97);
   }
 }
+
+/* Publicado após aprovação: hierarquia cromática sistematizada para rótulos de seção. */
+.about-copy > .eyebrow,
+.highlights .section-heading .eyebrow {
+  color: var(--magenta-crepusculo);
+}
+
+.menu .section-heading .eyebrow,
+.gallery .section-heading .eyebrow,
+.reviews .section-heading .eyebrow,
+.location .section-heading .eyebrow,
+.contact .section-heading .eyebrow,
+.instagram-card-inner .eyebrow {
+  color: #ffd98a;
+}
+
+.location .eyebrow,
+.contact .eyebrow {
+  color: #ffd98a !important;
+}
+
+/* Contraste reforçado para os rótulos sobre fundos laranja e magenta. */
+.menu .section-heading .eyebrow,
+.gallery .section-heading .eyebrow {
+  color: var(--indigo-noite);
+}
