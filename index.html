@@ -36,7 +36,7 @@
 
   <!-- ============ CSS ============ -->
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/approved-overrides.css?v=menu-color-nav-v1-2026" />
+  <link rel="stylesheet" href="css/approved-overrides.css?v=reviews-summary-center-v1-2026" />
 
   <!-- ============ Favicon ============ -->
   <link rel="icon" type="image/png" href="assets/images/logo-icon-black.png" />
@@ -451,20 +451,24 @@
         </div>
 
         <div class="reviews-summary" data-reveal>
-          <div>
-            <div class="rating-number"><span data-count-to="4.5" data-decimals="1">0</span></div>
-            <div class="stars-wrap" aria-hidden="true">
-              <span class="stars-bg">★★★★★</span>
-              <span class="stars-fill" style="width: 90%;">★★★★★</span>
+          <div class="reviews-rating-block">
+            <div class="reviews-rating-main">
+              <div class="rating-number"><span data-count-to="4.5" data-decimals="1">0</span></div>
             </div>
-            <small>Baseado em 74 avaliações no Google</small>
+            <div class="stars-wrap" role="img" aria-label="Nota média de 4,5 de 5 estrelas">
+              <span class="stars-bg" aria-hidden="true">★★★★★</span>
+              <span class="stars-fill" style="width: 90%;" aria-hidden="true">★★★★★</span>
+            </div>
+            <small>Baseado em <strong>74 avaliações</strong> no Google</small>
           </div>
-          <div>
-            <p style="font-size:1.05rem; max-width:38ch;">
-              Os temas mais citados pelos visitantes: <strong>pôr do sol</strong>,
-              <strong>atendimento</strong>, <strong>ambiente</strong> e
-              <strong>cardápio</strong>.
-            </p>
+          <div class="reviews-themes">
+            <span class="reviews-themes-label">Temas mais citados pelos visitantes</span>
+            <div class="reviews-themes-list" aria-label="Temas mais citados pelos visitantes">
+              <strong>pôr do sol</strong>
+              <strong>atendimento</strong>
+              <strong>ambiente</strong>
+              <strong>cardápio</strong>
+            </div>
           </div>
         </div>
 
@@ -650,6 +654,6 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
   </a>
 
-  <script src="js/main.js?v=menu-color-nav-v1-2026"></script>
+  <script src="js/main.js?v=reviews-summary-center-v1-2026"></script>
 </body>
 </html>

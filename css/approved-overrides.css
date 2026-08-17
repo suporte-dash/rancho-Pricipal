@@ -1497,3 +1497,133 @@
     box-shadow: inset 3px 0 0 var(--nav-accent);
   }
 }
+
+/* Prévia: resumo das avaliações reorganizado para leitura imediata. */
+.reviews-summary {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.72fr) minmax(18rem, 1.28fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.reviews-rating-block {
+  min-width: 0;
+}
+
+.reviews-rating-main {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.reviews .rating-number {
+  font-size: clamp(3.2rem, 5vw, 4.2rem);
+  line-height: 0.9;
+}
+
+.reviews .rating-scale {
+  color: rgba(255, 251, 244, 0.65);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.reviews .stars-wrap {
+  display: block;
+  width: max-content;
+  height: 1.45rem;
+  margin: 0.7rem 0 0.55rem;
+  line-height: 1;
+  letter-spacing: 0.14em;
+}
+
+.reviews .stars-bg,
+.reviews .stars-fill {
+  display: block;
+}
+
+.reviews .reviews-rating-block small {
+  display: block;
+  color: rgba(255, 251, 244, 0.68);
+  line-height: 1.45;
+}
+
+.reviews .reviews-rating-block small strong {
+  color: #fff3df;
+  font-weight: 800;
+}
+
+.reviews-themes {
+  min-width: 0;
+  padding-left: clamp(1.25rem, 3vw, 2.2rem);
+  border-left: 1px solid rgba(255, 251, 244, 0.18);
+}
+
+.reviews-themes-label {
+  display: block;
+  color: rgba(255, 251, 244, 0.72);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.reviews-themes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+
+.reviews-themes-list strong {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid rgba(255, 217, 138, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 217, 138, 0.1);
+  color: #fff3df;
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+@media (max-width: 600px) {
+  .reviews-summary {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .reviews-themes {
+    padding-top: 1.15rem;
+    padding-left: 0;
+    border-top: 1px solid rgba(255, 251, 244, 0.18);
+    border-left: 0;
+  }
+}
+
+/* Prévia: conteúdo restante do resumo centralizado dentro do card. */
+.reviews-summary {
+  justify-items: center;
+  text-align: center;
+}
+
+.reviews-rating-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reviews-rating-main {
+  justify-content: center;
+}
+
+.reviews-themes {
+  width: 100%;
+  text-align: center;
+}
+
+.reviews-themes-list {
+  justify-content: center;
+}
