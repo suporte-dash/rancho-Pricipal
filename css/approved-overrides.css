@@ -975,7 +975,7 @@
   }
 }
 
-/* Publicado após aprovação: textos dos destaques ocupam a largura útil do card. */
+/* Prévia: textos dos destaques ocupam a largura útil do card. */
 .highlights-grid .highlight-card h3,
 .highlights-grid .highlight-card p {
   width: 100%;
@@ -990,66 +990,12 @@
   }
 }
 
-/* Publicado após aprovação: rótulo “Por que visitar?” com a tonalidade rosada de “Sobre o Rancho”. */
+/* Prévia: rótulo “Por que visitar?” com a mesma tonalidade rosada de “Sobre o Rancho”. */
 .highlights .section-heading .eyebrow {
   color: var(--magenta-crepusculo);
 }
 
-/* Publicado após aprovação: cards do Cardápio harmonizados com a paleta translúcida dos destaques. */
-.menu-card,
-.menu-card:nth-child(2),
-.menu-card:nth-child(3),
-.menu-card:nth-child(4) {
-  background: linear-gradient(155deg, rgba(255, 251, 244, 0.72) 0%, rgba(255, 209, 160, 0.54) 100%);
-  border: 1px solid rgba(125, 76, 39, 0.14);
-  box-shadow: 0 16px 28px rgba(104, 58, 28, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.58);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-
-.menu-card:hover {
-  border-color: rgba(125, 76, 39, 0.3);
-  box-shadow: 0 24px 38px rgba(104, 58, 28, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.7);
-}
-
-/* Publicado após aprovação: linhas internas do Cardápio alinhadas entre os quatro cards. */
-.menu-card ul {
-  display: grid;
-  grid-template-rows: repeat(3, minmax(4.15rem, auto));
-  align-content: start;
-  gap: 0;
-}
-
-.menu-card ul li {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  min-height: 4.15rem;
-  box-sizing: border-box;
-  padding: 0.62rem 0;
-}
-
-.menu-card ul li > span:first-child {
-  min-width: 0;
-  padding-right: 0.55rem;
-}
-
-.menu-card .menu-price {
-  align-self: center;
-  justify-self: end;
-  white-space: nowrap;
-}
-
-@media (max-width: 600px) {
-  .menu-card ul {
-    grid-template-rows: repeat(3, minmax(3.55rem, auto));
-  }
-  .menu-card ul li {
-    min-height: 3.55rem;
-  }
-}
-
-/* Publicado após aprovação: acabamento editorial da navegação mobile e desktop. */
+/* Prévia: acabamento editorial da navegação mobile e desktop. */
 .main-nav a:focus-visible,
 .nav-toggle:focus-visible {
   outline: 2px solid var(--amber-poente);
@@ -1174,7 +1120,7 @@
     transform: translateX(3px);
   }
 
-  .main-nav .header-cta {
+    .main-nav .header-cta {
     width: 100%;
     margin-top: 0.72rem;
     padding: 0.95rem 1rem !important;
@@ -1182,13 +1128,67 @@
     text-align: center;
     box-shadow: 0 14px 28px rgba(255, 122, 69, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.45);
   }
-
   .main-nav .header-cta:active {
     transform: scale(0.97);
   }
 }
 
-/* Publicado após aprovação: hierarquia cromática sistematizada para rótulos de seção. */
+/* Prévia: cards do Cardápio harmonizados com a paleta translúcida dos destaques. */
+.menu-card,
+.menu-card:nth-child(2),
+.menu-card:nth-child(3),
+.menu-card:nth-child(4) {
+  background: linear-gradient(155deg, rgba(255, 251, 244, 0.72) 0%, rgba(255, 209, 160, 0.54) 100%);
+  border: 1px solid rgba(125, 76, 39, 0.14);
+  box-shadow: 0 16px 28px rgba(104, 58, 28, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.menu-card:hover {
+  border-color: rgba(125, 76, 39, 0.3);
+  box-shadow: 0 24px 38px rgba(104, 58, 28, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Prévia: linhas internas do Cardápio alinhadas entre os quatro cards. */
+.menu-card ul {
+  display: grid;
+  grid-template-rows: repeat(3, minmax(4.15rem, auto));
+  align-content: start;
+  gap: 0;
+}
+
+.menu-card ul li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  min-height: 4.15rem;
+  box-sizing: border-box;
+  padding: 0.62rem 0;
+}
+
+.menu-card ul li > span:first-child {
+  min-width: 0;
+  padding-right: 0.55rem;
+}
+
+.menu-card .menu-price {
+  align-self: center;
+  justify-self: end;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .menu-card ul {
+    grid-template-rows: repeat(3, minmax(3.55rem, auto));
+  }
+
+  .menu-card ul li {
+    min-height: 3.55rem;
+  }
+}
+
+/* Prévia: hierarquia cromática sistematizada para rótulos de seção. */
 .about-copy > .eyebrow,
 .highlights .section-heading .eyebrow {
   color: var(--magenta-crepusculo);
@@ -1203,12 +1203,13 @@
   color: #ffd98a;
 }
 
+/* Prévia: os rótulos com cor inline também seguem o dourado suave. */
 .location .eyebrow,
 .contact .eyebrow {
   color: #ffd98a !important;
 }
 
-/* Contraste reforçado para os rótulos sobre fundos laranja e magenta. */
+/* Prévia: maior contraste para os rótulos sobre fundos laranja e magenta. */
 .menu .section-heading .eyebrow,
 .gallery .section-heading .eyebrow {
   color: var(--indigo-noite);
@@ -1847,7 +1848,7 @@
   }
 }
 
-/* Prévia aprovada: acabamento de legibilidade do Hero — sem alterar a imagem ou a composição. */
+/* Prévia: acabamento de legibilidade do Hero — sem alterar a imagem ou a composição. */
 .hero-overlay {
   background: linear-gradient(
     180deg,
@@ -1873,7 +1874,7 @@
   }
 }
 
-/* Ajuste aprovado: indicador “Deslize” totalmente visível no desktop, acima da onda inferior. */
+/* Prévia: indicador “Deslize” totalmente visível no desktop, acima da onda inferior. */
 @media (min-width: 721px) {
   .hero-scroll-cue {
     bottom: clamp(4.25rem, 8vh, 5.25rem);
@@ -1881,4 +1882,153 @@
     color: rgba(255, 250, 240, 0.92);
     text-shadow: 0 2px 10px rgba(31, 22, 48, 0.62);
   }
+}
+
+
+
+/* ============================================================
+   Prévia local — painel editorial da colagem no Cardápio
+   ============================================================ */
+
+.menu-collage-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(15rem, 0.8fr);
+  align-items: stretch;
+  width: min(100%, 980px);
+  min-height: 248px;
+  margin: clamp(2rem, 4vw, 3rem) auto 2.4rem;
+  overflow: hidden;
+  background: rgba(255, 251, 244, 0.2);
+  border: 1px solid rgba(255, 251, 244, 0.38);
+  border-radius: 28px 18px 28px 12px;
+  box-shadow: 0 24px 46px rgba(113, 46, 22, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  isolation: isolate;
+}
+
+.menu-collage-panel__image {
+  position: relative;
+  min-height: 248px;
+  overflow: hidden;
+}
+
+.menu-collage-panel__image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 54%, rgba(232, 99, 47, 0.18) 82%, rgba(232, 99, 47, 0.62) 100%);
+}
+
+.menu-collage-panel__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 248px;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(1.02) contrast(0.98);
+  transform: scale(1.015);
+}
+
+.menu-collage-panel__copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  background: linear-gradient(135deg, rgba(255, 251, 244, 0.7) 0%, rgba(255, 221, 180, 0.48) 100%);
+}
+
+.menu-collage-panel__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.75rem;
+  color: var(--indigo-noite);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.menu-collage-panel__eyebrow::before {
+  content: "";
+  width: 2.2rem;
+  height: 0.2rem;
+  border-radius: 999px;
+  background: var(--amber-poente);
+}
+
+.menu-collage-panel__copy p {
+  max-width: 15rem;
+  margin: 0;
+  color: var(--indigo-noite);
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.25rem, 2.4vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+}
+
+@media (max-width: 720px) {
+  .menu-collage-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    margin-top: 1.8rem;
+    border-radius: 24px 16px 24px 12px;
+  }
+
+  .menu-collage-panel__image,
+  .menu-collage-panel__image img {
+    min-height: 0;
+    height: 12.5rem;
+  }
+
+  .menu-collage-panel__image::after {
+    background: linear-gradient(180deg, transparent 48%, rgba(232, 99, 47, 0.22) 78%, rgba(232, 99, 47, 0.48) 100%);
+  }
+
+  .menu-collage-panel__copy {
+    padding: 1.35rem 1.25rem 1.5rem;
+  }
+
+  .menu-collage-panel__copy p {
+    max-width: 18rem;
+    font-size: 1.35rem;
+  }
+}
+
+
+/* Prévia: acabamento final solicitado para o cabeçalho e painel editorial. */
+.brand:focus-visible {
+  outline: none;
+  outline-offset: 0;
+}
+
+.menu-collage-panel__image::after {
+  content: none;
+  display: none;
+  background: none;
+}
+
+@media (max-width: 720px) {
+  .menu-collage-panel__image::after {
+    content: none;
+    display: none;
+    background: none;
+  }
+}
+
+
+/* Prévia: remove os traços decorativos dos quatro rótulos principais sem alterar os degradês. */
+.about .eyebrow::before,
+.highlights .section-heading .eyebrow::before,
+.menu .section-heading .eyebrow::before,
+.gallery .section-heading .eyebrow::before {
+  content: none;
+  display: none;
 }
