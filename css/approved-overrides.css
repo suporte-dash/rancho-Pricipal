@@ -2135,3 +2135,134 @@
     margin-top: clamp(0.35rem, 1.2vh, 0.75rem);
   }
 }
+
+
+/* Prévia: animação “Pincelada ao pôr do sol” no título do Hero. */
+.hero-title-handwritten {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-title-handwritten::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -0.14em;
+  bottom: -0.12em;
+  left: -12%;
+  width: 28%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(255, 247, 225, 0.34), transparent);
+  opacity: 0;
+  transform: translateX(-160%) rotate(-3deg);
+  filter: blur(7px);
+  pointer-events: none;
+  animation: heroBrushLight 1.25s cubic-bezier(0.23, 1, 0.32, 1) 0.22s forwards;
+}
+
+.hero-title-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.18em) rotate(-1.2deg);
+  clip-path: inset(0 100% 0 0 round 0.12em);
+  animation: heroHandWordIn 0.62s cubic-bezier(0.23, 1, 0.32, 1) calc(0.3s + var(--word-index) * 0.085s) forwards;
+  will-change: opacity, transform, clip-path;
+}
+
+.hero-title-word--accent em {
+  animation: heroHandAccent 0.42s cubic-bezier(0.23, 1, 0.32, 1) 0.92s both;
+}
+
+.hero-content .lede {
+  opacity: 0;
+  animation: heroLedeIn 0.7s cubic-bezier(0.23, 1, 0.32, 1) 1.25s forwards;
+}
+
+.hero-content .hero-actions {
+  opacity: 0;
+  animation: heroActionsIn 0.65s cubic-bezier(0.23, 1, 0.32, 1) 1.48s forwards;
+}
+
+@keyframes heroHandWordIn {
+  0% {
+    opacity: 0;
+    transform: translateY(0.18em) rotate(-1.2deg);
+    clip-path: inset(0 100% 0 0 round 0.12em);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-0.02em) rotate(0.35deg);
+    clip-path: inset(0 10% 0 0 round 0.12em);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+    clip-path: inset(0 0 0 0 round 0.12em);
+  }
+}
+
+@keyframes heroHandAccent {
+  0% { filter: brightness(1); transform: rotate(-3deg) scale(1); }
+  55% { filter: brightness(1.22) drop-shadow(0 0 0.18em rgba(255, 217, 138, 0.42)); transform: rotate(-3deg) scale(1.035); }
+  100% { filter: brightness(1); transform: rotate(-3deg) scale(1); }
+}
+
+@keyframes heroBrushLight {
+  0% { opacity: 0; transform: translateX(-160%) rotate(-3deg); }
+  22% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(520%) rotate(-3deg); }
+}
+
+@keyframes heroLedeIn {
+  from { opacity: 0; transform: translateY(0.55rem); filter: blur(3px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes heroActionsIn {
+  from { opacity: 0; transform: translateY(0.6rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-handwritten::before,
+  .hero-title-word,
+  .hero-title-word--accent em,
+  .hero-content .lede,
+  .hero-content .hero-actions {
+    opacity: 1;
+    animation: none;
+    transform: none;
+    clip-path: none;
+    filter: none;
+  }
+}
+
+
+/* Prévia: correção anti-recorte dos glifos manuscritos do Hero. */
+.hero-title-word {
+  overflow: visible;
+  clip-path: none;
+  animation: heroHandWordInSafe 0.62s cubic-bezier(0.23, 1, 0.32, 1) calc(0.3s + var(--word-index) * 0.085s) forwards;
+}
+
+@keyframes heroHandWordInSafe {
+  0% {
+    opacity: 0;
+    transform: translateY(0.18em) rotate(-1.2deg) scale(0.985);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-0.02em) rotate(0.35deg) scale(1.008);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-word {
+    clip-path: none;
+    animation: none;
+  }
+}
