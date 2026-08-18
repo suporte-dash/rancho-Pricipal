@@ -2024,11 +2024,18 @@
 }
 
 
-/* Prévia: remove os traços decorativos dos quatro rótulos principais sem alterar os degradês. */
-.about .eyebrow::before,
-.highlights .section-heading .eyebrow::before,
-.menu .section-heading .eyebrow::before,
-.gallery .section-heading .eyebrow::before {
-  content: none;
-  display: none;
+
+/* Prévia: colagem completa no mobile, sem recorte das fotos. */
+@media (max-width: 720px) {
+  .menu-collage-panel__image {
+    height: auto;
+    aspect-ratio: 3 / 2;
+  }
+
+  .menu-collage-panel__image img {
+    height: 100%;
+    min-height: 0;
+    object-fit: cover;
+    transform: none;
+  }
 }
