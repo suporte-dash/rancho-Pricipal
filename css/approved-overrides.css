@@ -2266,3 +2266,43 @@
     animation: none;
   }
 }
+
+
+
+
+
+
+
+
+/* Prévia: marca d'água por imagem, separada da microinteração de brilho dos cards. */
+.menu-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-card > .menu-card__watermark {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: clamp(8rem, 44%, 11rem);
+  height: auto;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  opacity: 0.07;
+  pointer-events: none;
+  user-select: none;
+}
+
+.menu-card > h3,
+.menu-card > ul {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .menu-card > .menu-card__watermark {
+    width: clamp(7rem, 40%, 9rem);
+    opacity: 0.06;
+  }
+}
