@@ -2075,3 +2075,63 @@
     -webkit-backdrop-filter: blur(16px) saturate(150%);
   }
 }
+
+
+/* Prévia: menu mobile sempre inteiro, respeitando viewport dinâmica e área segura. */
+@media (max-width: 720px) {
+  .main-nav {
+    top: 0;
+    bottom: 0;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scroll-padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@supports (height: 100dvh) {
+  @media (max-width: 720px) {
+    .main-nav {
+      height: 100dvh;
+      max-height: 100dvh;
+    }
+  }
+}
+
+
+/* Prévia: composição mais equilibrada do menu em celulares maiores. */
+@media (max-width: 720px) {
+  .nav-toggle[aria-expanded="true"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 720px) and (min-height: 760px) {
+  .main-nav {
+    justify-content: space-evenly;
+    gap: clamp(0.55rem, 1.5vh, 0.95rem);
+    padding-top: clamp(4.75rem, 8vh, 6.5rem);
+    padding-bottom: calc(clamp(1.25rem, 3vh, 2rem) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .mobile-nav-brand {
+    margin-bottom: clamp(0.45rem, 1.6vh, 1rem);
+  }
+
+  .mobile-nav-brand img {
+    width: clamp(126px, 32vw, 150px);
+    height: auto;
+  }
+
+  .main-nav > a:not(.header-cta) {
+    padding: clamp(0.55rem, 1.2vh, 0.8rem) 0.78rem;
+  }
+
+  .main-nav .header-cta {
+    margin-top: clamp(0.35rem, 1.2vh, 0.75rem);
+  }
+}
