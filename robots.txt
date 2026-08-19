@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://suporte-dash.github.io/rancho-Pricipal/sitemap.xml
